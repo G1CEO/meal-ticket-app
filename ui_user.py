@@ -128,7 +128,11 @@ def render_user_mode(worksheet):
         '오근영', '안현수', '정균석', '최재우', '박지훈', '김지영', '김진영',  '황찬진',  '이주현', '김선열', 
         '손태호', '김종학', '윤재흥', '김태영', '황인재', '진승훈', '김재현', '서한규', '강종원', '최재혁'
     ]
-    user_name = st.selectbox("", users, index=0) 
+    col_u_1, col_u_2 = st.columns([2, 8], vertical_alignment="center")
+    with col_u_1:
+        st.markdown("사용자")
+    with col_u_2:
+        user_name = st.selectbox("사용자", users, index=0, label_visibility="collapsed") 
 
     # 2. Usage Date
     col_d_1, col_d_2 = st.columns([2, 8], vertical_alignment="center")
@@ -235,6 +239,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
