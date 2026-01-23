@@ -45,7 +45,7 @@ def render_user_mode(worksheet):
         /* 사용자, 사용일, 식권번호 입력창의 너비를 부모 대비 50%로 강제 고정 */
         div[data-testid="stSelectbox"],     
         div[data-testid="stDateInput"] {
-            width: 50% !important;
+            width: 30% !important;
         }
 
         /* 텍스트 크기 및 색상 스타일 (기존 유지) */
@@ -137,28 +137,28 @@ def render_user_mode(worksheet):
         '오근영', '안현수', '정균석', '최재우', '박지훈', '김지영', '김진영',  '황찬진',  '이주현', '김선열', 
         '손태호', '김종학', '윤재흥', '김태영', '황인재', '진승훈', '김재현', '서한규', '강종원', '최재혁'
     ]
-    col_u_1, col_u_2 = st.columns([2, 8], vertical_alignment="center")
+    col_u_1, col_u_2 = st.columns([1, 9], vertical_alignment="center")
     with col_u_1:
         st.markdown("사용자")
     with col_u_2:
         user_name = st.selectbox("사용자", users, index=0, label_visibility="collapsed")    
 
     # 2. Usage Date
-    col_d_1, col_d_2 = st.columns([2, 8], vertical_alignment="center")
+    col_d_1, col_d_2 = st.columns([1, 9], vertical_alignment="center")
     with col_d_1:
         st.markdown("사용일")
     with col_d_2:
         use_date = st.date_input("사용일", value=today, label_visibility="collapsed")     
 
     # 3. Usage Time
-    col_t_1, col_t_2 = st.columns([2, 8], vertical_alignment="center")
+    col_t_1, col_t_2 = st.columns([1, 9], vertical_alignment="center")
     with col_t_1:
          st.markdown("사용타임")
     with col_t_2:
          use_time = st.radio("사용타임", ["점심", "저녁"], horizontal=True, label_visibility="collapsed")
 
     # Helper: Ticket Type
-    col_type_1, col_type_2 = st.columns([2, 8], vertical_alignment="center")
+    col_type_1, col_type_2 = st.columns([1, 9], vertical_alignment="center")
     with col_type_1:
         st.markdown("식권종류")
     with col_type_2:
@@ -171,7 +171,7 @@ def render_user_mode(worksheet):
             st.warning(f"'{ticket_type}'의 사용 가능한 식권이 없습니다.")
             ticket_number = None
         else:
-             col_n_1, col_n_2 = st.columns([2, 8], vertical_alignment="center")
+             col_n_1, col_n_2 = st.columns([1, 9], vertical_alignment="center")
              with col_n_1:
                  st.markdown("식권번호")
              with col_n_2:
@@ -230,4 +230,5 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
