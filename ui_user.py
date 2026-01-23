@@ -86,7 +86,7 @@ def render_user_mode(worksheet):
 
         /* Custom Table Styling for Stats */
         .custom-table {
-            width: 50%;
+            width: 60%;
             border-collapse: collapse;
             margin-top: 5px;
         }
@@ -239,4 +239,5 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
