@@ -61,6 +61,11 @@ def render_user_mode(worksheet):
             background-color: #FFA500 !important;
             border-color: #FF8C00 !important;
         }
+        div[data-testid="stButton"] button[kind="primary"]:active {
+            background-color: #CC7000 !important;
+            border-color: #CC7000 !important;
+            transform: scale(0.95) !important;
+        }
 
         /* Secondary Button (Default/Admin): Large size, White Text */
         div[data-testid="stButton"] button[kind="secondary"] {
@@ -73,6 +78,10 @@ def render_user_mode(worksheet):
              border: 2px solid #ccc !important;
              color: #66CCFF !important;
              background-color: #FF8C00 !important;
+        }
+        div[data-testid="stButton"] button[kind="secondary"]:active {
+             transform: scale(0.95) !important;
+             background-color: #CC7000 !important;
         }
 
         /* Custom Table Styling for Stats */
@@ -169,7 +178,7 @@ def render_user_mode(worksheet):
 
     # Submit Button
     # Submit Button - Primary Type for Styling
-    if st.button("확인(한번만_터치하세요)", type="secondary"):
+    if st.button("확인(한번만_터치하세요)", type="primary"):
         if not ticket_number:
             st.error("식권 번호를 선택해주세요.")
         elif not user_name:
