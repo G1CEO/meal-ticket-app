@@ -27,7 +27,7 @@ def render_user_mode(worksheet):
         /* 사용자, 사용일, 식권번호 입력창의 너비를 부모 대비 50%로 강제 고정 */
         div[data-testid="stSelectbox"],     
         div[data-testid="stDateInput"] {
-            width: 50% !important;
+            width: 40% !important;
         }
 
         /* 텍스트 크기 및 색상 스타일 (기존 유지) */
@@ -64,7 +64,7 @@ def render_user_mode(worksheet):
         div[data-testid="stButton"] button[kind="primary"]:active {
             background-color: #CC7000 !important;
             border-color: #CC7000 !important;
-            transform: scale(0.95) !important;
+            transform: scale(0.9) !important;
         }
 
         /* Secondary Button (Default/Admin): Large size, White Text */
@@ -239,5 +239,6 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
