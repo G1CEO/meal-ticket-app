@@ -23,14 +23,14 @@ def render_user_mode(worksheet):
             color: #66CCFF !important;
             margin: 0px !important;         /* 텍스트 상하 마진 제거 */
             padding: 0px !important;        /* 패딩 제거 */
-            line-height: 1.2 !important;    /* 행 높이를 타이트하게 조정 */
+            line-height: 1.0 !important;    /* 행 높이를 타이트하게 조정 */
         }
 
         /* 3. 입력창(Selectbox, DateInput) 자체 여백 조정 */
         div[data-testid="stSelectbox"], 
         div[data-testid="stDateInput"],
         div[data-testid="stRadio"] {
-            width: 80% !important;
+            width: 70% !important;
             margin-top: 0px !important;
             margin-bottom: 0px !important;
         }
@@ -40,7 +40,7 @@ def render_user_mode(worksheet):
             font-size: 20px !important;
             font-weight: bold !important;
             color: #66CCFF !important;
-            margin-top: 5px !important;     /* 헤더 위쪽 간격 최소화 */
+            margin-top: 2px !important;     /* 헤더 위쪽 간격 최소화 */
             margin-bottom: 2px !important;
         }
 
@@ -231,6 +231,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
