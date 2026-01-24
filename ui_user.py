@@ -25,8 +25,8 @@ def render_user_mode(worksheet):
 
         /* --- 이하 기존 스타일 유지 --- */
         [data-testid="stVerticalBlock"] > div {
-        margin-top: 5px !important;
-        margin-bottom: 5px !important;
+        margin-top: 1px !important;
+        margin-bottom: 1px !important;
         }
         
         /* 2. 일반 텍스트 및 마크다운 줄간격/여백 제거 */
@@ -251,6 +251,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
