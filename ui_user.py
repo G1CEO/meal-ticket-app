@@ -53,22 +53,18 @@ def render_user_mode(worksheet):
             margin-bottom: 0px !important;
         }
         
-        /* 모바일에서 입력창 터치 시 키보드 팝업 방지 */
+        /* Selectbox와 DateInput 내부의 입력 필드만 터치 차단 */
         div[data-testid="stSelectbox"] input, 
         div[data-testid="stDateInput"] input {
-            /* 입력 기능을 읽기 전용처럼 동작하게 하여 키보드 방지 */
-            caret-color: transparent !important; /* 커서 숨김 */
+            pointer-events: none !important; /* 텍스트 입력 기능 차단 */
+        }
+        
+        /* 전체 박스 영역은 클릭 가능하도록 설정 (목록은 열려야 함) */
+        div[data-testid="stSelectbox"] [data-baseweb="select"], 
+        div[data-testid="stDateInput"] > div {
             cursor: pointer !important;
         }
-
-        /* 모바일 기기(터치 기반)에서만 입력 포커스 시 키보드 차단 보조 */
-        @media (pointer: coarse) {
-            div[data-testid="stSelectbox"] input, 
-            div[data-testid="stDateInput"] input {
-                pointer-events: none !important; /* 텍스트 필드 자체 터치 차단 (목록 클릭은 유지) */
-            }
-        }
-
+     
         /* Radio 버튼은 너비를 100%로 풀어서 옵션이 가로로 배치되게 함 */
         div[data-testid="stRadio"] {
             width: 100% !important;
@@ -273,6 +269,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
