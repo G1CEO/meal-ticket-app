@@ -95,7 +95,7 @@ def render_user_mode(worksheet):
             padding: 5px 10px !important;
             width: auto !important;
             border-radius: 12px !important;
-            border: 2px solid #E67E00 !important;
+            border: 1px solid #E67E00 !important;
             margin-top: 0px !important;    /* 버튼 위쪽 간격 제거 */
         }
         div[data-testid="stButton"] button[kind="primary"]:active {
@@ -252,6 +252,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
