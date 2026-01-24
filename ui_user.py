@@ -61,6 +61,14 @@ def render_user_mode(worksheet):
             cursor: pointer !important;
         }
 
+        /* 모바일 기기(터치 기반)에서만 입력 포커스 시 키보드 차단 보조 */
+        @media (pointer: coarse) {
+            div[data-testid="stSelectbox"] input, 
+            div[data-testid="stDateInput"] input {
+                pointer-events: none !important; /* 텍스트 필드 자체 터치 차단 (목록 클릭은 유지) */
+            }
+        }
+
         /* Radio 버튼은 너비를 100%로 풀어서 옵션이 가로로 배치되게 함 */
         div[data-testid="stRadio"] {
             width: 100% !important;
@@ -265,6 +273,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
