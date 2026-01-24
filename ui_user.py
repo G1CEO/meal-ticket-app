@@ -12,9 +12,9 @@ def render_user_mode(worksheet):
     <style>
         /* 2. 최상단 제목((주)그룹원 식사쿠폰) 위쪽 마진 제거 */
         h1 {
-        margin-top: -50px !important;  /* 음수 마진으로 더 바짝 붙임 */
+        margin-top: -60px !important;  /* 음수 마진으로 더 바짝 붙임 */
         padding-top: 0px !important;
-        margin-bottom: 5px !important;
+        margin-bottom: 2px !important;
         }
 
         /* 3. 성공 메시지 출력 시 발생하는 공백 최소화 */
@@ -25,8 +25,8 @@ def render_user_mode(worksheet):
 
         /* --- 이하 기존 스타일 유지 --- */
         [data-testid="stVerticalBlock"] > div {
-        margin-top: 1px !important;
-        margin-bottom: 1px !important;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
         }
         
         /* 2. 일반 텍스트 및 마크다운 줄간격/여백 제거 */
@@ -251,6 +251,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
