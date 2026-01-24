@@ -46,12 +46,12 @@ def render_user_mode(worksheet):
             font-size: 20px !important;
             font-weight: bold !important;
             color: #66CCFF !important;
-            margin-top: 2px !important;     /* 헤더 위쪽 간격 최소화 */
-            margin-bottom: 2px !important;
+            margin-top: 0px !important;     /* 헤더 위쪽 간격 최소화 */
+            margin-bottom: 0px !important;
         }
 
         .custom-table {
-            width: 50%;
+            width: 60%;
             border-collapse: collapse;
             margin-top: 0px !important;      /* 표 위쪽 간격 제거 */
         }
@@ -144,14 +144,14 @@ def render_user_mode(worksheet):
     with col_t_1:
          st.markdown("사용타임")
     with col_t_2:
-         use_time = st.radio("사용타임", ["점심", "저녁"], horizontal=True, label_visibility="collapsed")
+         use_time = st.radio("사용타임", ["점심  ", "저녁"], horizontal=True, label_visibility="collapsed")
 
     # Helper: Ticket Type
     col_type_1, col_type_2 = st.columns([2, 8], vertical_alignment="center", gap="small")
     with col_type_1:
         st.markdown("식권종류")
     with col_type_2:
-        ticket_type = st.radio("식권종류", ["밥플러스", "빅스푼"], horizontal=True, label_visibility="collapsed")
+        ticket_type = st.radio("식권종류", ["밥플러스  ", "빅스푼"], horizontal=True, label_visibility="collapsed")
 
     # 4. Ticket Number
     if ticket_type:
@@ -237,6 +237,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
