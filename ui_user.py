@@ -10,27 +10,48 @@ def render_user_mode(worksheet):
     # Custom CSS for styling
     st.markdown("""
     <style>
-        /* Labels: 2x size, Bold, White */
+        /* 1. 전체 위젯 간격 및 수직 블록 여백 최소화 */
+        [data-testid="stVerticalBlock"] > div {
+            margin-top: -15px !important;   /* 위젯 사이의 간격을 바짝 붙임 */
+            margin-bottom: -15px !important;
+        }
+
+        /* 2. 일반 텍스트 및 마크다운 줄간격/여백 제거 */
         .stMarkdown p, .stWidgetLabel, label, .stRadio label, p {
             font-size: 20px !important;
             font-weight: bold !important;
             color: #66CCFF !important;
+            margin: 0px !important;         /* 텍스트 상하 마진 제거 */
+            padding: 0px !important;        /* 패딩 제거 */
+            line-height: 1.2 !important;    /* 행 높이를 타이트하게 조정 */
         }
-        
-        /* Subheader (Remaining Quantity) */
+
+        /* 3. 입력창(Selectbox, DateInput) 자체 여백 조정 */
+        div[data-testid="stSelectbox"], 
+        div[data-testid="stDateInput"],
+        div[data-testid="stRadio"] {
+            width: 40% !important;
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+
+        /* 4. 서브헤더 및 표 간격 조정 */
         h3 {
             font-size: 20px !important;
             font-weight: bold !important;
             color: #66CCFF !important;
-        }
- 
-        /* 사용자, 사용일, 식권번호 입력창의 너비를 부모 대비 50%로 강제 고정 */
-        div[data-testid="stSelectbox"],     
-        div[data-testid="stDateInput"] {
-            width: 40% !important;
+            margin-top: 5px !important;     /* 헤더 위쪽 간격 최소화 */
+            margin-bottom: 2px !important;
         }
 
-        /* 텍스트 크기 및 색상 스타일 (기존 유지) */
+        .custom-table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 0px !important;      /* 표 위쪽 간격 제거 */
+        }
+
+        /* --- 이하 기존 스타일 유지 및 최적화 --- */
+
         .stSelectbox div[data-baseweb="select"] div,
         .stDateInput input,
         div[role="radiogroup"] p {
@@ -40,73 +61,44 @@ def render_user_mode(worksheet):
             line-height: 1.0 !important;
         }
 
-        /* Specific target for Selectbox selected value */
         .stSelectbox span {
-             color: #66CCFF !important;
+            color: #66CCFF !important;
         }
 
-        /* Primary Button (Confirm): Wide, Reduced Height */
+        /* 확인 버튼 스타일 */
         div[data-testid="stButton"] button[kind="primary"] {
-            background-color: #FF8C00 !important; /* Orange */
+            background-color: #FF8C00 !important;
             color: #66CCFF !important;
             font-size: 20px !important;
             padding: 5px 10px !important;
             width: auto !important;
             border-radius: 12px !important;
             border: 2px solid #E67E00 !important;
-            height: auto !important;
-            margin-top: 4px;
+            margin-top: 0px !important;    /* 버튼 위쪽 간격 제거 */
         }
-        div[data-testid="stButton"] button[kind="primary"]:hover {
-            background-color: #FFA500 !important;
-            border-color: #FF8C00 !important;
-        }
+        
         div[data-testid="stButton"] button[kind="primary"]:active {
-            background-color: #CC7000 !important;
-            border-color: #CC7000 !important;
             transform: scale(0.9) !important;
         }
 
-        /* Secondary Button (Default/Admin): Large size, White Text */
+        /* 관리자 버튼 스타일 */
         div[data-testid="stButton"] button[kind="secondary"] {
-             font-size: 20px !important;
-             font-weight: bold !important;
-             width: auto !important;
-             height: auto !important;
-             white-space: nowrap !important;
-             padding: 5px 10px !important;
-             border: 2px solid #ccc !important;
-             color: #66CCFF !important;
-             background-color: #FF8C00 !important;
-        }
-        div[data-testid="stButton"] button[kind="secondary"]:active {
-             transform: scale(0.95) !important;
-             background-color: #CC7000 !important;
+            font-size: 20px !important;
+            font-weight: bold !important;
+            width: auto !important;
+            padding: 5px 10px !important;
+            border: 2px solid #ccc !important;
+            color: #66CCFF !important;
+            background-color: #FF8C00 !important;
         }
 
-        /* Custom Table Styling for Stats */
-        .custom-table {
-            width: 60%;
-            border-collapse: collapse;
-            margin-top: 5px;
-        }
-        .custom-table th {
-            background-color: #333333; /* Dark Grey Header */
+        .custom-table th, .custom-table td {
             color: #66CCFF;
             font-size: 20px !important; 
             font-weight: bold !important;
-            padding: 5px;
-            text-align: left;
+            padding: 4px;                  /* 표 셀 내부 간격도 살짝 줄임 */
             border-bottom: 1px solid #555;
         }
-        .custom-table td {
-            color: #66CCFF;
-            font-size: 20px !important; 
-            font-weight: bold !important;
-            padding: 5px;
-            border-bottom: 1px solid #555;
-        }
-        
     </style>
     """, unsafe_allow_html=True)
 
@@ -132,7 +124,7 @@ def render_user_mode(worksheet):
     with col_u_1:
         st.markdown("사용자")
     with col_u_2:
-        user_name = st.selectbox("사용자", users, index=0, label_visibility="collapsed") 
+        user_name = st.selectbox("사용자", users, index=0, label_visibility="collapsed")    
 
     # 2. Usage Date
     col_d_1, col_d_2 = st.columns([2, 8], vertical_alignment="center", gap="small")
@@ -239,12 +231,4 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
-
-
-
-
-
-
-
-
 
