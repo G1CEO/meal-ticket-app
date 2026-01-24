@@ -12,8 +12,8 @@ def render_user_mode(worksheet):
     <style>
         /* 1. 전체 위젯 간격 및 수직 블록 여백 최소화 */
         [data-testid="stVerticalBlock"] > div {
-            margin-top: 2px !important;   /* 위젯 사이의 간격을 바짝 붙임 */
-            margin-bottom: 2px !important;
+            margin-top: 1px !important;   /* 위젯 사이의 간격을 바짝 붙임 */
+            margin-bottom: 1px !important;
         }
 
         /* 2. 일반 텍스트 및 마크다운 줄간격/여백 제거 */
@@ -144,14 +144,14 @@ def render_user_mode(worksheet):
     with col_t_1:
          st.markdown("사용타임")
     with col_t_2:
-         use_time = st.radio("사용타임", ["점심  ", "저녁"], horizontal=True, label_visibility="collapsed")
+         use_time = st.radio("사용타임", ["점심", "저녁"], horizontal=True, label_visibility="collapsed")
 
     # Helper: Ticket Type
     col_type_1, col_type_2 = st.columns([2, 8], vertical_alignment="center", gap="small")
     with col_type_1:
         st.markdown("식권종류")
     with col_type_2:
-        ticket_type = st.radio("식권종류", ["밥플러스  ", "빅스푼"], horizontal=True, label_visibility="collapsed")
+        ticket_type = st.radio("식권종류", ["밥플러스", "빅스푼"], horizontal=True, label_visibility="collapsed")
 
     # 4. Ticket Number
     if ticket_type:
@@ -237,6 +237,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
