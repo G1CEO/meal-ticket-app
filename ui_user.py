@@ -29,7 +29,7 @@ def render_user_mode(worksheet):
         /* 3. 입력창(Selectbox, DateInput) 너비 조정 및 Radio 버튼 가로 정렬 보장 */
         div[data-testid="stSelectbox"], 
         div[data-testid="stDateInput"] {
-            width: 50% !important;
+            width: 40% !important;
             margin-top: 0px !important;
             margin-bottom: 0px !important;
         }
@@ -237,6 +237,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
