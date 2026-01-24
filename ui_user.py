@@ -10,12 +10,31 @@ def render_user_mode(worksheet):
     # Custom CSS for styling
     st.markdown("""
     <style>
-        /* 1. 전체 위젯 간격 및 수직 블록 여백 최소화 */
-        [data-testid="stVerticalBlock"] > div {
-            margin-top: 1px !important;   /* 위젯 사이의 간격을 바짝 붙임 */
-            margin-bottom: 1px !important;
+        /* 1. 메인 컨테이너 상단 패딩 제거 (화면 맨 위 공통 공백) */
+        .block-container {
+        padding-top: 1rem !important;  /* 기본 6rem에서 1rem으로 축소 */
+        padding-bottom: 1rem !important;
         }
 
+        /* 2. 최상단 제목((주)그룹원 식사쿠폰) 위쪽 마진 제거 */
+        h1 {
+        margin-top: -30px !important;  /* 음수 마진으로 더 바짝 붙임 */
+        padding-top: 0px !important;
+        margin-bottom: 10px !important;
+        }
+
+        /* 3. 성공 메시지 출력 시 발생하는 공백 최소화 */
+        div[style*="text-align: center;"] {
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+        }
+
+        /* --- 이하 기존 스타일 유지 --- */
+        [data-testid="stVerticalBlock"] > div {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        }
+        
         /* 2. 일반 텍스트 및 마크다운 줄간격/여백 제거 */
         .stMarkdown p, .stWidgetLabel, label, .stRadio label, p {
             font-size: 20px !important;
@@ -238,6 +257,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
