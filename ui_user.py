@@ -26,11 +26,17 @@ def render_user_mode(worksheet):
             line-height: 1.0 !important;    /* 행 높이를 타이트하게 조정 */
         }
 
-        /* 3. 입력창(Selectbox, DateInput) 자체 여백 조정 */
+        /* 3. 입력창(Selectbox, DateInput) 너비 조정 및 Radio 버튼 가로 정렬 보장 */
         div[data-testid="stSelectbox"], 
-        div[data-testid="stDateInput"],
+        div[data-testid="stDateInput"] {
+            width: 50% !important;
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+
+        /* Radio 버튼은 너비를 100%로 풀어서 옵션이 가로로 배치되게 함 */
         div[data-testid="stRadio"] {
-            width: 70% !important;
+            width: 100% !important;
             margin-top: 0px !important;
             margin-bottom: 0px !important;
         }
@@ -231,6 +237,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
