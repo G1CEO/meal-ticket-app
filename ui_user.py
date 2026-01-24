@@ -104,6 +104,7 @@ def render_user_mode(worksheet):
             font-weight: bold !important;
             padding: 4px;                  /* 표 셀 내부 간격도 살짝 줄임 */
             border-bottom: 1px solid #555;
+            text-align: center !important; /* 표 안의 모든 내용을 가운데 정렬 */
         }
     </style>
     """, unsafe_allow_html=True)
@@ -237,6 +238,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
