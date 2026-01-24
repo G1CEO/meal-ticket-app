@@ -12,8 +12,8 @@ def render_user_mode(worksheet):
     <style>
         /* 1. 전체 위젯 간격 및 수직 블록 여백 최소화 */
         [data-testid="stVerticalBlock"] > div {
-            margin-top: -15px !important;   /* 위젯 사이의 간격을 바짝 붙임 */
-            margin-bottom: -15px !important;
+            margin-top: 0px !important;   /* 위젯 사이의 간격을 바짝 붙임 */
+            margin-bottom: 0px !important;
         }
 
         /* 2. 일반 텍스트 및 마크다운 줄간격/여백 제거 */
@@ -231,4 +231,5 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
