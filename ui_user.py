@@ -52,6 +52,14 @@ def render_user_mode(worksheet):
             margin-top: 0px !important;
             margin-bottom: 0px !important;
         }
+        
+        /* 모바일에서 입력창 터치 시 키보드 팝업 방지 */
+        div[data-testid="stSelectbox"] input, 
+        div[data-testid="stDateInput"] input {
+            /* 입력 기능을 읽기 전용처럼 동작하게 하여 키보드 방지 */
+            caret-color: transparent !important; /* 커서 숨김 */
+            cursor: pointer !important;
+        }
 
         /* Radio 버튼은 너비를 100%로 풀어서 옵션이 가로로 배치되게 함 */
         div[data-testid="stRadio"] {
@@ -257,6 +265,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
