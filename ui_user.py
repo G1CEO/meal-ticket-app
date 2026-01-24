@@ -10,7 +10,7 @@ def render_user_mode(worksheet):
     # Custom CSS for styling
     st.markdown("""
     <style>
-      /* 1. 메인 컨테이너 상단 패딩 제거 (화면 맨 위 공통 공백) */
+        /* 1. 메인 컨테이너 상단 패딩 제거 (화면 맨 위 공통 공백) */
         .block-container {
         padding-top: 3rem !important;  /* 기본 6rem에서 1rem으로 축소 */
         padding-bottom: 3rem !important;
@@ -35,7 +35,7 @@ def render_user_mode(worksheet):
         margin-bottom: 0px !important;
         }
         
-        /* 2. 일반 텍스트 및 마크다운 줄간격/여백 제거 */
+        /* 4. 일반 텍스트 및 마크다운 줄간격/여백 제거 */
         .stMarkdown p, .stWidgetLabel, label, .stRadio label, p {
             font-size: 20px !important;
             font-weight: bold !important;
@@ -45,7 +45,7 @@ def render_user_mode(worksheet):
             line-height: 1.0 !important;    /* 행 높이를 타이트하게 조정 */
         }
 
-        /* 3. 입력창(Selectbox, DateInput) 너비 조정 및 Radio 버튼 가로 정렬 보장 */
+        /* 5. 입력창(Selectbox, DateInput) 너비 조정 및 Radio 버튼 가로 정렬 보장 */
         div[data-testid="stSelectbox"], 
         div[data-testid="stDateInput"] {
             width: 40% !important;
@@ -53,14 +53,14 @@ def render_user_mode(worksheet):
             margin-bottom: 0px !important;
         }
                 
-        /* Radio 버튼은 너비를 100%로 풀어서 옵션이 가로로 배치되게 함 */
+        /* 6. Radio 버튼은 너비를 100%로 풀어서 옵션이 가로로 배치되게 함 */
         div[data-testid="stRadio"] {
             width: 100% !important;
             margin-top: 0px !important;
             margin-bottom: 0px !important;
         }
 
-        /* 4. 서브헤더 및 표 간격 조정 */
+        /* 7. 서브헤더 및 표 간격 조정 */
         h3 {
             font-size: 20px !important;
             font-weight: bold !important;
@@ -68,7 +68,6 @@ def render_user_mode(worksheet):
             margin-top: 0px !important;     /* 헤더 위쪽 간격 최소화 */
             margin-bottom: 0px !important;
         }
-
         .custom-table {
             width: 60%;
             border-collapse: collapse;
@@ -76,7 +75,6 @@ def render_user_mode(worksheet):
         }
 
         /* --- 이하 기존 스타일 유지 및 최적화 --- */
-
         .stSelectbox div[data-baseweb="select"] div,
         .stDateInput input,
         div[role="radiogroup"] p {
@@ -85,7 +83,6 @@ def render_user_mode(worksheet):
             font-weight: bold !important;
             line-height: 1.0 !important;
         }
-
         .stSelectbox span {
             color: #66CCFF !important;
         }
@@ -101,9 +98,8 @@ def render_user_mode(worksheet):
             border: 2px solid #E67E00 !important;
             margin-top: 0px !important;    /* 버튼 위쪽 간격 제거 */
         }
-        
         div[data-testid="stButton"] button[kind="primary"]:active {
-            transform: scale(0.9) !important;
+            transform: scale(0.8) !important;
         }
 
         /* 관리자 버튼 스타일 */
@@ -190,7 +186,6 @@ def render_user_mode(worksheet):
 
     # 6. Usage/Loss Toggle
     # Req: Toggle button, default "Used". "Loss" only for admin?
-    # 6. Usage/Loss Toggle
     is_lost = st.toggle("분실 (체크시 분실 처리)")
     action_type = "분실" if is_lost else "사용"
 
@@ -257,6 +252,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
