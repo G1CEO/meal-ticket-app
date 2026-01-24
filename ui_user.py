@@ -30,7 +30,7 @@ def render_user_mode(worksheet):
         div[data-testid="stSelectbox"], 
         div[data-testid="stDateInput"],
         div[data-testid="stRadio"] {
-            width: 50% !important;
+            width: 80% !important;
             margin-top: 0px !important;
             margin-bottom: 0px !important;
         }
@@ -231,6 +231,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
