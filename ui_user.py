@@ -52,13 +52,7 @@ def render_user_mode(worksheet):
             margin-top: 0px !important;
             margin-bottom: 0px !important;
         }
-        
-        /* Selectbox와 DateInput 내부의 입력 필드만 터치 차단 */
-        div[data-testid="stSelectbox"] input, 
-        div[data-testid="stDateInput"] input {
-            pointer-events: none !important; /* 텍스트 입력 기능 차단 */
-        }
-           
+                
         /* Radio 버튼은 너비를 100%로 풀어서 옵션이 가로로 배치되게 함 */
         div[data-testid="stRadio"] {
             width: 100% !important;
@@ -263,6 +257,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
