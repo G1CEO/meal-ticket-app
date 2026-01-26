@@ -5,6 +5,31 @@ import time
 import data_manager
 
 def render_user_mode(worksheet):
+    
+    @st.dialog("최종 확인", width="small")
+    def confirm_dialog(user_name, ticket_type, ticket_number, use_time, use_date, action_type):
+        st.write(f"{user_name} : {use_time},{ticket_type}, {ticket_number}번 ok?")
+        st.write("--------------------------------------------")
+        
+        col_yes, col_no = st.columns(2)
+        with col_yes:
+            if st.button("예", type="primary", key="confirm_yes", use_container_width=True):
+                success = data_manager.use_ticket(
+                    worksheet, 
+                    ticket_number, 
+                    user_name, 
+                    use_time,
+                    str(use_date),
+                    note=action_type
+                )
+                if success:
+                    st.session_state["success_message"] = f"{ticket_type} {ticket_number}번 처리 완료!"
+                    st.rerun()
+        
+        with col_no:
+            if st.button("아니오", key="confirm_no", use_container_width=True):
+                st.rerun()
+
 
   
     # Custom CSS for styling
@@ -78,13 +103,13 @@ def render_user_mode(worksheet):
         .stSelectbox div[data-baseweb="select"] div,
         .stDateInput input,
         div[role="radiogroup"] p {
-            color: #66CCFF !important;
+            color: #8B0000 !important;
             font-size: 20px !important; 
             font-weight: bold !important;
             line-height: 1.0 !important;
         }
         .stSelectbox span {
-            color: #66CCFF !important;
+            color: #8B0000 !important;
         }
 
         /* 확인 버튼 스타일 */
@@ -93,7 +118,7 @@ def render_user_mode(worksheet):
             color: #66CCFF !important;
             font-size: 20px !important;
             padding: 5px 10px !important;
-            width: auto !important;
+            width: 100% !important;
             border-radius: 12px !important;
             border: 1px solid #E67E00 !important;
             margin-top: 0px !important;    /* 버튼 위쪽 간격 제거 */
@@ -106,7 +131,7 @@ def render_user_mode(worksheet):
         div[data-testid="stButton"] button[kind="secondary"] {
             font-size: 20px !important;
             font-weight: bold !important;
-            width: auto !important;
+            width: 100% !important;
             padding: 5px 10px !important;
             border: 2px solid #ccc !important;
             color: #66CCFF !important;
@@ -134,19 +159,7 @@ def render_user_mode(worksheet):
 
     today = datetime.now().date()
 
-    # Layout: Label (Left 3) | Input (Right 7)
-    
-    # 1. User Selection (Moved to Top)
-    users = [
-        '원경재', '심인숙', '이준', '이세라', '김재희', '김규화', '이민만', '황희상', '박자초', '주성보', 
-        '오근영', '안현수', '정균석', '최재우', '박지훈', '김지영', '김진영',  '황찬진',  '이주현', '김선열', 
-        '손태호', '김종학', '윤재흥', '김태영', '황인재', '진승훈', '김재현', '서한규', '강종원', '최재혁'
-    ]
-    col_u_1, col_u_2 = st.columns([2, 8], vertical_alignment="center", gap="small")
-    with col_u_1:
-        st.markdown("사용자")
-    with col_u_2:
-        user_name = st.selectbox("사용자", users, index=0, label_visibility="collapsed")    
+    # Layout: Label (Left 3) | Input (Right 7) 
 
     # 2. Usage Date
     col_d_1, col_d_2 = st.columns([2, 8], vertical_alignment="center", gap="small")
@@ -184,6 +197,18 @@ def render_user_mode(worksheet):
     else:
         ticket_number = None
 
+    # 5. User Selection (Moved to Top)
+    users = [
+        '원경재', '심인숙', '이준', '이세라', '김재희', '김규화', '이민만', '황희상', '박자초', '주성보', 
+        '오근영', '안현수', '정균석', '최재우', '박지훈', '김지영', '김진영',  '황찬진',  '이주현', '김선열', 
+        '손태호', '김종학', '윤재흥', '김태영', '황인재', '진승훈', '김재현', '서한규', '강종원', '최재혁'
+    ]
+    col_u_1, col_u_2 = st.columns([2, 8], vertical_alignment="center", gap="small")
+    with col_u_1:
+        st.markdown("사용자")
+    with col_u_2:
+        user_name = st.selectbox("사용자", users, index=0, label_visibility="collapsed")
+
     # 6. Usage/Loss Toggle
     # Req: Toggle button, default "Used". "Loss" only for admin?
     is_lost = st.toggle("분실 (체크시 분실 처리)")
@@ -197,20 +222,7 @@ def render_user_mode(worksheet):
         elif not user_name:
             st.error("사용자 이름을 입력해주세요.")
         else:
-            # No admin check needed for "분실" per new requirements
-
-            success = data_manager.use_ticket(
-                worksheet, 
-                ticket_number, 
-                user_name, 
-                use_time,
-                str(use_date),
-                note=action_type
-            )
-            
-            if success:
-                st.session_state["success_message"] = f"{ticket_type} {ticket_number}번 처리 완료!"
-                st.rerun()
+            confirm_dialog(user_name, ticket_type, ticket_number, use_time, use_date, action_type)
 
     # Success Message Display (Moved below button)
     if "success_message" in st.session_state:
@@ -252,6 +264,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
