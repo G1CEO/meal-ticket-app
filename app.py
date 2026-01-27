@@ -36,7 +36,7 @@ def main():
     # Can use sidebar or just a button at top.
     
     # Title (Logo removed per request)
-    st.markdown("<h2 style='margin: 0; padding: 10px 0;'>(주)그룹원 식사쿠폰</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin: 0; padding: 10px 0; font-size: 24px;'>(주)그룹원 식사쿠폰</h2>", unsafe_allow_html=True)
 
     # Routing
     current_page = st.session_state.get("page", "home")
@@ -55,3 +55,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
