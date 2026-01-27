@@ -94,7 +94,7 @@ def render_user_mode(worksheet):
             margin-bottom: 0px !important;
         }
         .custom-table {
-            width: 60%;
+            width: 70%;
             border-collapse: collapse;
             margin-top: 0px !important;      /* 표 위쪽 간격 제거 */
         }
@@ -264,6 +264,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
