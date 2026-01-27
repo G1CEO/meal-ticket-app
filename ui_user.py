@@ -37,8 +37,8 @@ def render_user_mode(worksheet):
     <style>
         /* 1. 메인 컨테이너 상단 패딩 제거 (화면 맨 위 공통 공백) */
         .block-container {
-        padding-top: 3rem !important;  /* 기본 6rem에서 3rem으로 축소 */
-        padding-bottom: 3rem !important;
+        padding-top: 4rem !important;  /* 기본 6rem에서 4rem으로 축소 */
+        padding-bottom: 4rem !important;
         }
    
         /* 2. 최상단 제목((주)그룹원 식사쿠폰) 위쪽 마진 제거 */
@@ -264,6 +264,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
