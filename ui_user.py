@@ -37,13 +37,13 @@ def render_user_mode(worksheet):
     <style>
         /* 1. 메인 컨테이너 상단 패딩 제거 (화면 맨 위 공통 공백) */
         .block-container {
-        padding-top: 3rem !important;  /* 기본 6rem에서 1rem으로 축소 */
+        padding-top: 3rem !important;  /* 기본 6rem에서 3rem으로 축소 */
         padding-bottom: 3rem !important;
         }
    
         /* 2. 최상단 제목((주)그룹원 식사쿠폰) 위쪽 마진 제거 */
         h1 {
-        margin-top: -80px !important;  /* 음수 마진으로 더 바짝 붙임 */
+        margin-top: -70px !important;  /* 음수 마진으로 더 바짝 붙임 */
         padding-top: 0px !important;
         margin-bottom: 2px !important;
         }
@@ -264,6 +264,7 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
