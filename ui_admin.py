@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import data_manager
 
-ADMIN_EMAILS = ["wkj1003@gmail.com", "sis06200915@gmail.com"]
+ADMIN_EMAILS = ["wkj1003@gmail.com", "sis06200915@gmail.com","linpap1101@gmail.com]
 
 def render_admin_login():
     st.header("🔒 관리자 로그인")
@@ -175,5 +175,6 @@ def render_admin_dashboard(worksheet):
 
     st.divider()
     
+
 
 
