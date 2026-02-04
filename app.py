@@ -28,7 +28,7 @@ def main():
     if not spreadsheet:
         st.stop() # Stop if no connection
         
-    worksheet = data_manager.get_log_sheet(spreadsheet)
+    worksheet = data_manager.fetch_log_sheet(spreadsheet)
     user_list = data_manager.get_user_list(spreadsheet)
         
     # Navigation / Layout replacement

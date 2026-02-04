@@ -81,9 +81,10 @@ def connect_to_sheet():
                      
         return None
 
-def get_log_sheet(sheet):
+def fetch_log_sheet(sheet):
     """
     Retrieves the main log worksheet from the spreadsheet object.
+    (Renamed to force module reload)
     """
     if sheet is None:
         return None
