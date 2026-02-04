@@ -31,6 +31,7 @@ def main():
     worksheet = data_manager.fetch_log_sheet(spreadsheet)
     user_list = data_manager.get_user_list(spreadsheet)
     admin_list = data_manager.get_admin_list(spreadsheet)
+    admin_password = data_manager.get_admin_password(spreadsheet)
         
     # Navigation / Layout replacement
     # User requested: "Home Screen 1 (Common)" and "Admin Button on Top Right"
@@ -49,7 +50,7 @@ def main():
         # If logged in as admin, show Admin UI
         ui_admin.render_admin_dashboard(worksheet)
     elif current_page == "admin_login":
-        ui_admin.render_admin_login(admin_list)
+        ui_admin.render_admin_login(admin_list, admin_password)
         if st.button("홈으로 돌아가기"):
             st.session_state["page"] = "home"
             st.rerun()
