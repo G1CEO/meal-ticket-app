@@ -10,12 +10,10 @@ import os
 SHEET_ID = "18CKNYYa05EoVcfFJW7ZNvUTKnqUIL_UyXIi6pBXv8ZI"
 SHEET_NAME_LOG = "식권관리대장" # Main sheet name for tickets
 
-@st.cache_resource(ttl=600)
 def connect_to_sheet():
     """
     Connects to Google Sheets using credentials from Streamlit secrets or local file.
     Returns the worksheet object.
-    Cached for 10 minutes to minimize repetitive API calls.
     """
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     creds = None
@@ -49,8 +47,6 @@ def connect_to_sheet():
         client = gspread.authorize(creds)
         sheet = client.open_by_key(SHEET_ID)
         return sheet
-        
-        return None
         
     except APIError as e:
         if e.response.status_code == 429:
