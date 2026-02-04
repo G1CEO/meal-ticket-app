@@ -2,9 +2,7 @@ import streamlit as st
 import pandas as pd
 import data_manager
 
-ADMIN_EMAILS = ["wkj1003@gmail.com", "sis06200915@gmail.com"]
-
-def render_admin_login():
+def render_admin_login(admin_list):
     st.header("🔒 관리자 로그인")
     
     # Custom CSS for Login Styling
@@ -46,7 +44,10 @@ def render_admin_login():
     
     email = st.text_input("아이디")
     if st.button("로그인"):
-        if email.strip() in ADMIN_EMAILS:
+        # Check against the dynamic admin list
+        # If list is currently empty (e.g. connection error or sheet empty), maybe fallback or fail secure?
+        # Fails secure by default since email won't be in empty list.
+        if email.strip() in admin_list:
             st.session_state["is_admin"] = True
             st.session_state["admin_email"] = email
             st.success("로그인 성공!")

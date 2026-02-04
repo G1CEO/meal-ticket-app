@@ -126,6 +126,30 @@ def get_user_list(_sheet):
         return []
         
 
+@st.cache_data(ttl=3600)
+def get_admin_list(_sheet):
+    """
+    Retrieves the admin email list from the '관리자목록' sheet.
+    Assumes column A contains the emails and Row 1 is header.
+    Cached for 1 hour.
+    """
+    if _sheet is None:
+        return []
+        
+    SHEET_NAME_ADMINS = "관리자목록"
+    try:
+        worksheet = _sheet.worksheet(SHEET_NAME_ADMINS)
+        # Get all values from the first column
+        emails = worksheet.col_values(1)
+        
+        # If list is not empty, assume first row is header and exclude it
+        if len(emails) > 1:
+            return emails[1:]
+        return []
+    except Exception:
+        # If sheet doesn't exist or other error, return empty list
+        return []
+
 
 def get_all_tickets(worksheet):
     """
