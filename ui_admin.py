@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import data_manager
 
-def render_admin_login(admin_list):
+def render_admin_login(admin_list, valid_password):
     st.header("🔒 관리자 로그인")
     
     # Custom CSS for Login Styling
@@ -43,17 +43,26 @@ def render_admin_login(admin_list):
     st.info("관리자 외 로그인 시도 금지")
     
     email = st.text_input("아이디")
+    password = st.text_input("비밀번호", type="password")
+    
     if st.button("로그인"):
         # Check against the dynamic admin list
-        # If list is currently empty (e.g. connection error or sheet empty), maybe fallback or fail secure?
-        # Fails secure by default since email won't be in empty list.
-        if email.strip() in admin_list:
+        is_email_valid = email.strip() in admin_list
+        
+        # Check password
+        # valid_password is passed as a string from data_manager
+        is_pw_valid = (str(password).strip() == str(valid_password)) if valid_password else False
+        
+        if is_email_valid and is_pw_valid:
             st.session_state["is_admin"] = True
             st.session_state["admin_email"] = email
             st.success("로그인 성공!")
             st.rerun()
         else:
-            st.error("관리자 권한이 없는 계정입니다.")
+            if not is_email_valid:
+                st.error("등록되지 않은 관리자 계정입니다.")
+            elif not is_pw_valid:
+                st.error("비밀번호가 올바르지 않습니다.")
 
 def render_admin_dashboard(worksheet):
     st.header("⚙️ 관리자 모드")

@@ -151,6 +151,25 @@ def get_admin_list(_sheet):
         return []
 
 
+@st.cache_data(ttl=3600)
+def get_admin_password(_sheet):
+    """
+    Retrieves the admin password from the '비밀번호' sheet (Cell A2).
+    Cached for 1 hour.
+    """
+    if _sheet is None:
+        return None
+        
+    SHEET_NAME_PW = "비밀번호"
+    try:
+        worksheet = _sheet.worksheet(SHEET_NAME_PW)
+        # Fetch value from A2
+        password = worksheet.acell('A2').value
+        return str(password).strip() if password else None
+    except Exception:
+        return None
+
+
 def get_all_tickets(worksheet):
     """
     Fetches all data from the sheet and returns a DataFrame.
