@@ -23,10 +23,13 @@ if "is_admin" not in st.session_state:
 
 def main():
     # Connect to DB
-    worksheet = data_manager.connect_to_sheet()
+    spreadsheet = data_manager.connect_to_sheet()
     
-    if not worksheet:
+    if not spreadsheet:
         st.stop() # Stop if no connection
+        
+    worksheet = data_manager.get_log_sheet(spreadsheet)
+    user_list = data_manager.get_user_list(spreadsheet)
         
     # Navigation / Layout replacement
     # User requested: "Home Screen 1 (Common)" and "Admin Button on Top Right"
@@ -36,7 +39,7 @@ def main():
     # Can use sidebar or just a button at top.
     
     # Title (Logo removed per request)
-    st.markdown("<h2 style='margin: 0; padding: 10px 0; font-size: 30px;'>(주)그룹원 식사쿠폰</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin: 0; padding: 10px 0; font-size: 24px;'>(주)그룹원 식사쿠폰</h2>", unsafe_allow_html=True)
 
     # Routing
     current_page = st.session_state.get("page", "home")
@@ -51,10 +54,7 @@ def main():
             st.rerun()
     else:
         # Default Common User Mode
-        ui_user.render_user_mode(worksheet)
+        ui_user.render_user_mode(worksheet, user_list)
 
 if __name__ == "__main__":
     main()
-
-
-

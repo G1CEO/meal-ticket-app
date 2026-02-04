@@ -4,7 +4,7 @@ from datetime import datetime
 import time
 import data_manager
 
-def render_user_mode(worksheet):
+def render_user_mode(worksheet, user_list):
     
     @st.dialog("최종 확인", width="small")
     def confirm_dialog(user_name, ticket_type, ticket_number, use_time, use_date, action_type):
@@ -94,7 +94,7 @@ def render_user_mode(worksheet):
             margin-bottom: 0px !important;
         }
         .custom-table {
-            width: 70%;
+            width: 60%;
             border-collapse: collapse;
             margin-top: 0px !important;      /* 표 위쪽 간격 제거 */
         }
@@ -198,11 +198,12 @@ def render_user_mode(worksheet):
         ticket_number = None
 
     # 5. User Selection (Moved to Top)
-    users = [
-        '원경재', '심인숙', '이준', '이세라', '김재희', '김규화', '이민만', '황희상', '박자초', '주성보', 
-        '오근영', '안현수', '정균석', '최재우', '박지훈', '김지영', '김진영',  '황찬진',  '이주현', '김선열', 
-        '손태호', '김종학', '윤재흥', '김태영', '황인재', '진승훈', '김재현', '서한규', '강종원', '최재혁'
-    ]
+    # user_list is passed from app.py
+    if not user_list:
+        # Fallback if list is empty
+        users = ["데이터 없음"]
+    else:
+        users = user_list
     col_u_1, col_u_2 = st.columns([2, 8], vertical_alignment="center", gap="small")
     with col_u_1:
         st.markdown("사용자")
@@ -239,8 +240,8 @@ def render_user_mode(worksheet):
             {msg}
         </div>
         """, unsafe_allow_html=True)
-        # Wait 3s and clear
-        time.sleep(3)
+        # Wait 2s and clear
+        time.sleep(2)
         del st.session_state["success_message"]
         st.rerun()
 
@@ -264,9 +265,6 @@ def render_user_mode(worksheet):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
-
-
-
 
 
 
