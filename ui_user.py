@@ -217,7 +217,7 @@ def render_user_mode(worksheet, user_list):
 
     # Submit Button
     # Submit Button - Primary Type for Styling
-    if st.button("식권번호 확인후 한번만 클릭", type="primary"):
+    if st.button("식권번호 / 사용자 확인 후 클릭", type="primary"):
         if not ticket_number:
             st.error("식권 번호를 선택해주세요.")
         elif not user_name:
@@ -265,6 +265,7 @@ def render_user_mode(worksheet, user_list):
     if st.button("관리자"):
         st.session_state["page"] = "admin_login"
         st.rerun()
+
 
 
 
