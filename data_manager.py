@@ -264,10 +264,11 @@ def add_new_tickets(worksheet, ticket_type, start_num, count):
         return True
     except APIError as e:
         if e.response.status_code == 429:
-            st.warning("쓰기 한도 초과, 이후 재시도 요망")
+            st.warning("동시 접속으로 인한 구글시트 쓰기 한도 초과 상황입니다. 식권을 사진 찍고, 2~3분 뒤에 재시도 바랍니다. 등록 하지 않으면, 분실처리 되어 소재 파악을 하게 됩니다!!")
         else:
             st.error(f"식권 추가 중 API 오류 발생: {e}")
         return False
     except Exception as e:
         st.error(f"식권 추가 중 오류 발생: {e}")
         return False
+
